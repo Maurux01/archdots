@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+# archdots · usado solo por startx (si usas un display manager no hace falta).
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+
+exec i3

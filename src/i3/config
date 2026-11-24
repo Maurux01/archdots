@@ -1,0 +1,184 @@
+# ─────────────────────────────────────────────────────────────────────────────
+#  archdots · i3 config
+#  Minimal i3 setup for Arch Linux. Catppuccin Mocha palette.
+#  Keybinds inspired by https://github.com/Justus0405/i3wm-dotfiles
+# ─────────────────────────────────────────────────────────────────────────────
+
+# -----------------------------------------------------------------------------
+# Colores (Catppuccin Mocha)
+# -----------------------------------------------------------------------------
+set $rosewater #f5e0dc
+set $mauve     #cba6f7
+set $red       #f38ba8
+set $peach     #fab387
+set $yellow    #f9e2af
+set $green     #a6e3a1
+set $teal      #94e2d5
+set $blue      #89b4fa
+set $text      #cdd6f4
+set $surface2  #585b70
+set $surface1  #45475a
+set $surface0  #313244
+set $base      #1e1e2e
+set $mantle    #181825
+
+client.focused          $blue     $base $text   $rosewater $blue
+client.focused_inactive $surface2 $base $text   $rosewater $surface2
+client.unfocused        $surface2 $base $text   $rosewater $surface2
+client.urgent           $red      $base $peach  $surface2  $red
+client.placeholder      $surface2 $base $text   $surface2  $surface2
+client.background       $base
+
+# -----------------------------------------------------------------------------
+# General
+# -----------------------------------------------------------------------------
+set $mod Mod4
+
+set $terminal    kitty
+set $browser     brave
+set $filemanager nemo
+
+font pango:JetBrainsMono Nerd Font 10
+
+default_border pixel 2
+hide_edge_borders smart
+
+gaps inner 10px
+gaps outer 10px
+smart_gaps on
+
+floating_modifier $mod
+tiling_drag modifier titlebar
+
+# Floating por defecto para diálogos y reproductores
+for_window [class="mpv"] floating enable
+for_window [class="gnome-calculator"] floating enable
+for_window [class="Galculator"] floating enable
+for_window [class="FileRoller"] floating enable
+for_window [class="org.gnome.FileRoller"] floating enable
+
+# -----------------------------------------------------------------------------
+# Autostart (sin compositor)
+# -----------------------------------------------------------------------------
+exec_always --no-startup-id ~/.config/polybar/launch.sh
+exec_always --no-startup-id feh --bg-fill ~/.config/wallpapers/catppuccin-mocha.png
+exec --no-startup-id dunst
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork --color=1e1e2e
+
+# -----------------------------------------------------------------------------
+# Aplicaciones
+# -----------------------------------------------------------------------------
+bindsym $mod+Return      exec --no-startup-id $terminal
+bindsym $mod+Shift+Return exec --no-startup-id $terminal --working-directory=~
+bindsym $mod+e           exec --no-startup-id $filemanager
+bindsym $mod+b           exec --no-startup-id $browser
+bindsym $mod+n           exec --no-startup-id flameshot gui
+bindsym $mod+m           exec --no-startup-id flameshot full
+bindsym Shift+Print      exec --no-startup-id flameshot full
+bindsym Ctrl+Shift+Escape exec --no-startup-id $terminal -e htop
+bindsym $mod+q           kill
+
+# -----------------------------------------------------------------------------
+# Rofi
+# -----------------------------------------------------------------------------
+bindsym $mod+d       exec --no-startup-id rofi -show drun
+bindsym $mod+o       exec --no-startup-id ~/.local/bin/rofi-ssh.sh
+bindsym $mod+p       exec --no-startup-id ~/.local/bin/rofi-calc.sh
+bindsym $mod+w       exec --no-startup-id ~/.local/bin/wallpaper-picker.sh
+bindsym Mod1+Tab     exec --no-startup-id rofi -show window
+bindsym $mod+x       exec --no-startup-id ~/.local/bin/powermenu.sh
+bindsym $mod+Shift+l exec --no-startup-id ~/.local/bin/lock.sh
+
+# -----------------------------------------------------------------------------
+# Media / brillo
+# -----------------------------------------------------------------------------
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute     exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86AudioPlay        exec --no-startup-id playerctl play-pause
+bindsym XF86AudioNext        exec --no-startup-id playerctl next
+bindsym XF86AudioPrev        exec --no-startup-id playerctl previous
+bindsym XF86MonBrightnessUp   exec --no-startup-id brightnessctl set 5%+
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
+
+# -----------------------------------------------------------------------------
+# Navegación y contenedores
+# -----------------------------------------------------------------------------
+bindsym $mod+Left  focus left
+bindsym $mod+Down  focus down
+bindsym $mod+Up    focus up
+bindsym $mod+Right focus right
+
+bindsym $mod+Shift+Left  move left
+bindsym $mod+Shift+Down  move down
+bindsym $mod+Shift+Up    move up
+bindsym $mod+Shift+Right move right
+
+bindsym $mod+h split h
+bindsym $mod+v split v
+bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+bindsym $mod+a focus parent
+bindsym $mod+r mode "resize"
+
+# -----------------------------------------------------------------------------
+# Workspaces
+# -----------------------------------------------------------------------------
+set $ws1  "1:term"
+set $ws2  "2:web"
+set $ws3  "3:code"
+set $ws4  "4:files"
+set $ws5  "5:media"
+set $ws6  "6:chat"
+set $ws7  "7:game"
+set $ws8  "8:mail"
+set $ws9  "9:sys"
+set $ws10 "10:scratch"
+
+bindsym $mod+1  workspace number $ws1
+bindsym $mod+2  workspace number $ws2
+bindsym $mod+3  workspace number $ws3
+bindsym $mod+4  workspace number $ws4
+bindsym $mod+5  workspace number $ws5
+bindsym $mod+6  workspace number $ws6
+bindsym $mod+7  workspace number $ws7
+bindsym $mod+8  workspace number $ws8
+bindsym $mod+9  workspace number $ws9
+bindsym $mod+0  workspace number $ws10
+
+bindsym $mod+Shift+1  move container to workspace number $ws1
+bindsym $mod+Shift+2  move container to workspace number $ws2
+bindsym $mod+Shift+3  move container to workspace number $ws3
+bindsym $mod+Shift+4  move container to workspace number $ws4
+bindsym $mod+Shift+5  move container to workspace number $ws5
+bindsym $mod+Shift+6  move container to workspace number $ws6
+bindsym $mod+Shift+7  move container to workspace number $ws7
+bindsym $mod+Shift+8  move container to workspace number $ws8
+bindsym $mod+Shift+9  move container to workspace number $ws9
+bindsym $mod+Shift+0  move container to workspace number $ws10
+
+bindsym $mod+Shift+Tab workspace back_and_forth
+
+# -----------------------------------------------------------------------------
+# Sesión
+# -----------------------------------------------------------------------------
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m '¿Salir de i3?' -B 'Sí, salir' 'i3-msg exit'"
+
+# -----------------------------------------------------------------------------
+# Modo resize
+# -----------------------------------------------------------------------------
+mode "resize" {
+  bindsym Left  resize shrink width 10 px or 10 ppt
+  bindsym Down  resize grow height 10 px or 10 ppt
+  bindsym Up    resize shrink height 10 px or 10 ppt
+  bindsym Right resize grow width 10 px or 10 ppt
+
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+  bindsym $mod+r mode "default"
+}

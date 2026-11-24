@@ -1,0 +1,108 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   archdots · rofi (Catppuccin Mocha)
+   ───────────────────────────────────────────────────────────────────────────── */
+
+configuration {
+  font:                  "JetBrainsMono Nerd Font 11";
+  show-icons:            true;
+  icon-theme:            "Papirus-Dark";
+  display-drun:          " apps ";
+  display-window:        " windows ";
+  display-ssh:           " ssh ";
+  drun-display-format:   "{name}";
+  sidebar-mode:          false;
+}
+
+* {
+  bg:                    #1e1e2e;
+  bg-alt:                #313244;
+  fg:                    #cdd6f4;
+  fg-dim:                #a6adc8;
+  accent:                #cba6f7;
+  blue:                  #89b4fa;
+  red:                   #f38ba8;
+}
+
+window {
+  width:                 620px;
+  border:                0px;
+  border-radius:         0px;
+  background-color:      @bg;
+  text-color:            @fg;
+}
+
+outer-box {
+  padding:               12px;
+}
+
+inputbar {
+  children:              [prompt, entry];
+  background-color:      @bg-alt;
+  text-color:            @fg;
+  padding:               10px 12px;
+  border-radius:         0px;
+}
+
+prompt {
+  text-color:            @accent;
+  padding:               0px 8px 0px 0px;
+}
+
+entry {
+  text-color:            @fg;
+  placeholder:           "Buscar...";
+  placeholder-color:     @fg-dim;
+}
+
+scrollbar {
+  background-color:      @bg;
+  handle-color:          @bg-alt;
+  handle-width:          4px;
+  border-radius:         0px;
+}
+
+listview {
+  lines:                 8;
+  columns:               1;
+  spacing:               2px;
+  dynamic:               true;
+  cycle:                 true;
+  scrollbar-width:       4px;
+}
+
+element {
+  background-color:      transparent;
+  text-color:            @fg-dim;
+  padding:               7px 10px;
+  border-radius:         0px;
+}
+
+element selected {
+  background-color:      @bg-alt;
+  text-color:            @accent;
+}
+
+element-text {
+  background-color:      transparent;
+  text-color:            inherit;
+}
+
+textbox {
+  text-color:            inherit;
+}
+
+mode-switcher {
+  spacing:               4px;
+}
+
+button {
+  background-color:      @bg-alt;
+  text-color:            @fg;
+  padding:               4px 10px;
+  border-radius:         0px;
+}
+
+button selected {
+  background-color:      @accent;
+  text-color:            @bg;
+}

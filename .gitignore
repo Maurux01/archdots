@@ -1,0 +1,7 @@
+# Archivos generados / respaldos locales
+backups/
+*.log
+
+# Sistema operativo
+.DS_Store
+Thumbs.db

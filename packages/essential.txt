@@ -1,0 +1,22 @@
+# archdots · paquetes esenciales (pacman, repos oficiales)
+i3-wm
+kitty
+polybar
+rofi
+dunst
+feh
+flameshot
+nemo
+bc
+xclip
+libnotify
+brightnessctl
+pipewire
+pipewire-pulse
+wireplumber
+i3lock
+xss-lock
+polkit-gnome
+xorg-xrandr
+playerctl
+pavucontrol

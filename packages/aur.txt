@@ -1,0 +1,10 @@
+# archdots · paquetes opcionales (algunos desde AUR)
+#
+# Instálalos con tu helper preferido, p. ej.:
+#   yay -S --needed $(grep -Ev '^[[:space:]]*(#|$)' packages/aur.txt | awk '{print $1}')
+
+ttf-jetbrains-mono-nerd          # fuente usada por i3, kitty, polybar y rofi (está en extra)
+papirus-icon-theme               # tema de iconos del sistema (está en extra)
+papirus-folders-catppuccin-git   # colores Catppuccin para las carpetas de Papirus (AUR)
+catppuccin-gtk-theme-mocha       # tema GTK Catppuccin Mocha (AUR; Nemo y diálogos)
+brave-browser                    # navegador por defecto ($browser en i3/config) (AUR)
